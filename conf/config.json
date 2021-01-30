@@ -1,0 +1,32 @@
+{
+    "user":{
+        "name": "admin",
+        "pass": "admin123"
+    },
+    "app": {
+        "host": "localhost",
+        "port": 3001,
+        "schema": "http",
+        "url": "http://domain.tld"
+    },
+
+    "db":{
+        "dbconn": "postgres://postgres:admin@localhost:5432/base",
+        "builds": "builds"
+    },
+
+    "session": {
+        "secret": "it:demo:secret",
+        "key": "sid",
+        "cookie": {
+            "path": "/",
+            "httpOnly": true,
+            "maxAge": null
+        }
+    },
+
+    "memcached": {
+        "hosts": ["127.0.0.1:11211"],
+        "prefix": "it:demo:023:"
+    }
+}

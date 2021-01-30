@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto&subset=cyrillic-ext,latin,cyrillic' rel='stylesheet' type='text/css'>
+
+	<!--Ol3-->
+	<link href="/css/libs/ol3/ol.css" rel="stylesheet" type="text/css" />
+
+	<!--Bootstrap-->
+	<link href="/css/libs/twitter-bootstrap/bootstrap.css" rel="stylesheet" type="text/css" />
+
+	<!--jstree-->
+	<link href="/css/libs/jstree/proton/style.min.css"  rel="stylesheet" />
+
+    <!-- Theme style -->
+    <link href="/css/app/core.css" rel="stylesheet" type="text/css" />	
+	<link href="/css/app/map.css" rel="stylesheet" type="text/css" />
+
+    <!-- RequireJS-->
+    <script src="/js/libs/require-2.1.15.js"></script>  
+
+	<title>Карта</title>
+</head>
+
+	<body class="skin-blue fixed">
+
+        <header class="header">
+            <a href="/" class="logo">
+                Геопортал
+            </a>
+            <nav class="navbar navbar-static-top" role="navigation">
+                <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <div class="navbar-right">
+                    <ul class="nav navbar-nav">
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+
+            <aside class="left-side sidebar-offcanvas">
+                <section class="sidebar">
+                	
+                    <ul class="nav nav-tabs" role="tablist" id="map-tabs">
+                        <li role="presentation"><a href="#layers" aria-controls="layers" role="tab" data-toggle="tab">Слои</a></li>
+                        <li role="presentation"><a href="#legend" aria-controls="legend" role="tab" data-toggle="tab">Легенда</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane" id="layers">
+                            <div id="layers_tree"></div>
+                            <div id="baselayers_tree"></div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane legend" id="legend"></div>
+                    </div>
+
+                </section>
+            </aside>
+
+            <aside class="right-side">                
+                <section class="content">   
+                	<div id="map" class="map"></div>  
+                    <div id="map-toolbar" class='map-toolbar'></div>       	           	                	                
+                </section>
+            </aside>
+
+        </div>
+
+        <script id="movieTemplate" type="text/x-jsrender">
+
+            {{for infos}}
+                <div class="row" style="background:#eee;padding-left:5px;">
+                    <h5>{{>title}}</h5>
+                </div>
+                {{for info}}
+                    <div class="row" style="padding-left:10px">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 noPadding padding-right">
+                            {{>key}}
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-nowrap noPadding">
+                            {{if type === 'img' }}
+                                <img class = "feature_image" data-whatever = "/image?getimg={{>value}}.jpg" src = '/image?getimg={{>value}}.jpg' style='max-height:100px;max-width:100px;'>
+                            {{else}}   
+                                {{>value}}
+                            {{/if}} 
+                        </div>                
+                    </div>
+                {{/for}} 
+            {{/for}}        
+
+        </script>
+
+<!-- Modal -->
+<div class="modal fade" id="feature_image_modal" tabindex="-1" role="dialog" aria-labelledby="Изображение" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Изображение</h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>    
